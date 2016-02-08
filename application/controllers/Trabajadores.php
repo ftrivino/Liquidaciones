@@ -97,15 +97,19 @@ class Trabajadores extends CI_Controller {
         
     public function calendario($trabajador)
     {
+        
+        $data = array("idusuario" => $trabajador);
+        
         $this->load->view('header');
         $this->load->view('nav');
-        $this->load->view('trabajadores/calendario');
+        $this->load->view('trabajadores/calendario', $data);
         $this->load->view('footer');
     }
     
     public function ajax_calendario()
     {
         $fecha = $this->input->post('fecha');
+        $idusuario = $this->input->post('idusuario');
         
         $partes = explode("/", $fecha);
         
@@ -118,6 +122,18 @@ class Trabajadores extends CI_Controller {
             
         $total_dias = cal_days_in_month(CAL_GREGORIAN, $mes, $ano);
         
+        
+        /* OBTENER CALENDARIO GUARDADO */
+        
+        $termino_date = (($total_dias<10) ? '0'.$total_dias : $total_dias);
+        
+        $inicio                 = $ano.'-'.$mes.'-01';
+        $termino                = $ano.'-'.$mes.'-'.$termino_date;
+        $calendario_guardado    = $this->dbtrabajadores->ver_asistencia($idusuario,$inicio, $termino);
+        
+               
+        /* OBTENER CALENDARIO GUARDADO */
+                
         echo '<ol class="calendar" start="'.$primer_dia_mes.'">';
 
 	echo '<li id="lastmonth">';
@@ -155,7 +171,14 @@ class Trabajadores extends CI_Controller {
             $n_dia = (($i<10) ? "0".$i : $i);
             
             echo '		<li>'.$i;
-            echo '                  <input type="checkbox" name="asistencia[]" value="'.$ano.'-'.$mes.'-'.$n_dia.'">';
+            
+            if(in_array($ano.'-'.$mes.'-'.$n_dia,$calendario_guardado)){
+                echo '                  <input type="checkbox" name="asistencia[]" checked="checked" value="'.$ano.'-'.$mes.'-'.$n_dia.'">';
+            }else{
+                echo '                  <input type="checkbox" name="asistencia[]" value="'.$ano.'-'.$mes.'-'.$n_dia.'">';
+            }
+            
+            
             echo '              </li>';
             $dia_inicio++;
             if($dia_inicio==8){ $dia_inicio = 1; }
@@ -175,6 +198,21 @@ class Trabajadores extends CI_Controller {
         echo '</ol>';
         
         
+        
+        
     }
     
+    public function ajax_guardar_calendario()
+    {
+        $idusuario  = $this->input->post('idusuario');
+        
+        $asistencia = $this->input->post('asistencia');
+        
+        foreach($asistencia as $fecha){
+            $data = array("fecha" => $fecha,
+                          "idtrabajadores" => $idusuario);
+            
+            $this->dbtrabajadores->guardar_asistencia($data);
+        }
+    }
 }

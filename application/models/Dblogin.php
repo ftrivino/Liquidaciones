@@ -30,4 +30,16 @@ class Dblogin extends CI_Model {
             return(false);
         }
     }
+    
+    function user_id($username)
+    {
+        $query = $this->db->query("SELECT * FROM usuarios WHERE username='$username' LIMIT 1;");
+        
+        if ($query->num_rows() > 0){
+            $r = $query->result();
+            return($r[0]->idusuarios);
+        }else{
+            return(false);
+        }
+    }
 }

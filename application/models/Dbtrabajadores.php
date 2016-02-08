@@ -42,4 +42,28 @@ class Dbtrabajadores extends CI_Model {
             return(false);
         }
     }
+    
+    function guardar_asistencia($data)
+    {
+        if($this->db->insert('asistencia', $data)){
+            return(true);
+        }else{
+            return(false);
+        }
+    }
+    
+    function ver_asistencia($idusuario,$inicio, $termino)
+    {
+        $query = $this->db->query("SELECT *, DATE(fecha) as solo_fecha FROM asistencia WHERE idtrabajadores='$idusuario' AND DATE(fecha)>='$inicio' AND DATE(fecha)<='$termino';");
+        
+        $resultados = $query->result();
+        
+        $salida = array();
+        
+        foreach($resultados as $resultado){
+            $salida[] = $resultado->solo_fecha;
+        }
+        
+        return($salida);
+    }
 }

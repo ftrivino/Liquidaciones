@@ -24,7 +24,7 @@
                             echo '  <td>';
                             echo '      <a href="/empresas/borrar/'.$empresa->idempresas.'" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></a>';
                             echo '      <a href="/empresas/editar/'.$empresa->idempresas.'" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>';
-                            echo '      <a href="/trabajadores/empresa/'.$empresa->idempresas.'" class="btn btn-default btn-xs"><i class="fa fa-building-o"></i></a>';
+                            echo '      <a href="/trabajadores/ver/'.$empresa->idempresas.'" class="btn btn-default btn-xs"><i class="fa fa-building-o"></i></a>';
                             echo '  </td> ';
                             echo '</tr>';
                                 }

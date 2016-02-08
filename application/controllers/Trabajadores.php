@@ -215,4 +215,28 @@ class Trabajadores extends CI_Controller {
             $this->dbtrabajadores->guardar_asistencia($data);
         }
     }
+    
+    public function liquidacion($idusuario)
+    {
+        $data = array("idusuario" => $idusuario);
+        
+        $this->load->view('header');
+        $this->load->view('nav');
+        $this->load->view('trabajadores/liquidacion', $data);
+        $this->load->view('footer');
+    }
+    
+    public function ajax_liquidacion()
+    {
+        $fecha = $this->input->post('fecha');
+        $idusuario = $this->input->post('idusuario');
+        
+        $partes = explode("/", $fecha);
+        
+        $mes = $partes[0];
+        $ano = $partes[1];
+        
+        
+        
+    }
 }

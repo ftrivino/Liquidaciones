@@ -63,10 +63,14 @@ class Trabajadores extends CI_Controller {
         
         public function nueva()
 	{
-                        
+            $afps = $this->dbtrabajadores->afps();
+            $empresas = $this->dbtrabajadores->empresas($this->sess_data['uid']);
+            
+            $data = array("afps" => $afps, "empresas" => $empresas);
+            
             $this->load->view('header');
             $this->load->view('nav');
-            $this->load->view('trabajadores/nueva');
+            $this->load->view('trabajadores/nueva', $data);
             $this->load->view('footer');
 	}
         
@@ -75,18 +79,28 @@ class Trabajadores extends CI_Controller {
             
             $nombre         = $this->input->post('nombre');
             $rut            = $this->input->post('rut');
-            $razonsocial    = $this->input->post('razonsocial');
+            $sueldo_liquido = $this->input->post('sueldo_liquido');
+            $cargo          = $this->input->post('cargo');
+            $fecha          = $this->input->post('fecha');
+            $empresa        = $this->input->post('empresa');
+            $afp            = $this->input->post('afp');
+            $salud          = $this->input->post('salud');
+            
+            $partes_fecha   = explode("/", $fecha);
             
             if(!empty($nombre) && !empty($rut)){
                 $data = array(
-                   'nombre'         => $nombre,
-                   'rut'            => $rut,
-                   'razonsocial'    => $razonsocial,
-                   'idusuarios'     => $this->sess_data['uid'],
+                   'nombre'                 => $nombre,
+                   'rut'                    => $rut,
+                   'fecha_incorporacion'    => $partes_fecha[2].'-'.$partes_fecha[1].'-'.$partes_fecha[0],
+                   'sueldo_liquido'         => $sueldo_liquido,
+                   'idempresas'             => $empresa,
+                   'afp'                    => $afp,  
+                   'salud'                  => $salud,
                 );
 
-                if($this->dbempresas->guardar($data)){
-                    $this->output->set_header("Location: /empresas/ver");
+                if($this->dbtrabajadores->guardar($data)){
+                    $this->output->set_header("Location: /trabajadores/ver");
                 }else{
 
                 }

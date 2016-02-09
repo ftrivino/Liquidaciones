@@ -36,7 +36,7 @@ class Dbtrabajadores extends CI_Model {
     
     function guardar($data)
     {
-        if($this->db->insert('empresas', $data)){
+        if($this->db->insert('trabajadores', $data)){
             return(true);
         }else{
             return(false);
@@ -65,5 +65,12 @@ class Dbtrabajadores extends CI_Model {
         }
         
         return($salida);
+    }
+    
+    function afps()
+    {
+        $query = $this->db->query("SELECT * FROM afps");
+                
+        return($query->result());
     }
 }

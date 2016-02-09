@@ -7,6 +7,7 @@
     <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
     <script src="/js/es.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/rut.js"></script>
     <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>  
   </body>
 </html>

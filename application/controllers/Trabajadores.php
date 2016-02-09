@@ -130,10 +130,9 @@ class Trabajadores extends CI_Controller {
         $mes = $partes[0];
         $ano = $partes[1];
         
-        $mes_anterior = ($mes-1)==0 ? $mes = 12 : $mes-1;
         
         $primer_dia_mes = (new DateTime($ano.'-'.$mes.'-01'))->modify('first day of this month')->format('N');
-            
+        
         $total_dias = cal_days_in_month(CAL_GREGORIAN, $mes, $ano);
         
         
@@ -221,6 +220,14 @@ class Trabajadores extends CI_Controller {
         $idusuario  = $this->input->post('idusuario');
         
         $asistencia = $this->input->post('asistencia');
+        $fecha_base = $this->input->post('fecha_base');
+                
+        $partes_fecha_base = explode("/", $fecha_base);
+        
+        $mes = $partes_fecha_base[0];
+        $ano = $partes_fecha_base[1];
+        
+        $this->dbtrabajadores->limpiar_mes($idusuario, $mes, $ano);
         
         foreach($asistencia as $fecha){
             $data = array("fecha" => $fecha,
@@ -250,7 +257,8 @@ class Trabajadores extends CI_Controller {
         $mes = $partes[0];
         $ano = $partes[1];
         
+        $string = $this->load->view('trabajadores/liquidacion_estructura', '', TRUE);
         
-        
+        echo $string;
     }
 }

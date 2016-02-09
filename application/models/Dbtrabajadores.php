@@ -73,4 +73,10 @@ class Dbtrabajadores extends CI_Model {
                 
         return($query->result());
     }
+    
+    function limpiar_mes($idusuario, $mes, $ano)
+    {
+        $query = $this->db->query("DELETE FROM asistencia WHERE idtrabajadores='$idusuario' AND MONTH(fecha)='$mes' AND YEAR(fecha)='$ano'");
+    }
+    
 }

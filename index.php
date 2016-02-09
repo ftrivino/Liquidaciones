@@ -1,5 +1,10 @@
 <?php
 date_default_timezone_set('America/Santiago');
+if( ! ini_get('date.timezone') )
+{
+   date_default_timezone_set('America/Santiago');
+} 
+
 setlocale(LC_ALL,"es_CL");
 /**
  * CodeIgniter

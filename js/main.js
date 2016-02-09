@@ -3,6 +3,8 @@ function ajax_calendario(){
     var fecha = $("#fecha").val();
     $(".ajax_calendario").toggleClass('active');
     
+    $("#fecha_base").val(fecha);
+    
     $.ajax({
       method: "POST",
       url: "/trabajadores/ajax_calendario/",

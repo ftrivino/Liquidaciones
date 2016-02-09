@@ -39,6 +39,7 @@
                 
                 <form method="post" action="#" enctype="multipart/form-data" id="form_calendario">
                     <input type="hidden" name="idusuario" value="<?php echo $idusuario; ?>">
+                    <input type="hidden" name="fecha_base" id="fecha_base"  value="">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-8" id="contenido_calendario_ajax">

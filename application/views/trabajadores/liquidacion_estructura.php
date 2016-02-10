@@ -32,16 +32,16 @@
             <table border="2" style="background-color:#FFFFFF;border-collapse:collapse;border:2px solid #000000;color:#000000;width:100%; margin-top: 20px;" cellpadding="30" cellspacing="1">
                 <tr>
                     <td style="padding: 20px; width: 45%;" align="left" width="45%;">
-                        <p style="font-family: Arial; font-weight: bold;">Nombre Empleado: Felipe Triviño Espinoza.</p>
-                        <p style="font-family: Arial; font-weight: bold;">RUT: 16.392.209-6</p>
-                        <p style="font-family: Arial; font-weight: bold;">Cargo: Desarrollador/Administrador de sistemas.</p>
-                        <p style="font-family: Arial; font-weight: bold;">AFP: CUPRUM</p>
-                        <p style="font-family: Arial; font-weight: bold;">ISAPRE: FONASA</p>
+                        <p style="font-family: Arial; font-weight: bold;">Nombre Empleado: <?php echo $usuario->nombre; ?></p>
+                        <p style="font-family: Arial; font-weight: bold;">RUT: <?php echo $usuario->rut; ?></p>
+                        <p style="font-family: Arial; font-weight: bold;">Cargo: <?php echo $usuario->cargo; ?></p>
+                        <p style="font-family: Arial; font-weight: bold;">AFP: <?php echo $usuario->afp_nombre; ?></p>
+                        <p style="font-family: Arial; font-weight: bold;">ISAPRE: <?php echo ucfirst($usuario->salud); ?></p>
                     </td>
                     
                     <td style="padding: 20px; width: 45%;" align="right" width="45%">
-                        <p style="font-family: Arial; font-weight: bold;">Fecha de ingreso: 01/04/2015.</p>
-                        <p style="font-family: Arial; font-weight: bold;">Días trabajados: 30</p>
+                        <p style="font-family: Arial; font-weight: bold;">Fecha de ingreso: <?php echo (new DateTime($usuario->fecha_incorporacion))->format('d/m/Y'); ?>.</p>
+                        <p style="font-family: Arial; font-weight: bold;">Días trabajados: <?php echo $dias_trabajados; ?></p>
                         <p style="font-family: Arial; font-weight: bold;">Horas extra: 0,0</p>
                         <p style="font-family: Arial; font-weight: bold;">&nbsp;</p>
                     </td>
@@ -63,7 +63,7 @@
                                     <table border="0" style="margin-top: 0px;" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
                                             <td width="70%">Sueldo base</td>
-                                            <td width="30%" align="right">$250.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format(250000,0,".","."); ?></td>
                                         </tr>
                                         <tr>
                                             <td width="70%">Bono</td>

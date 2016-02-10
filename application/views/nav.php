@@ -27,6 +27,9 @@
                 <li><a href="/trabajadores/nueva">Nuevo trabajador</a></li>                
               </ul>
             </li>
+            <ul class="nav navbar-nav navbar-right">
+                <li class=""><a href="/login/salir">Salir</a></li>
+            </ul>
             
           </ul>
         </div><!--/.nav-collapse -->

@@ -79,4 +79,17 @@ class Dbtrabajadores extends CI_Model {
         $query = $this->db->query("DELETE FROM asistencia WHERE idtrabajadores='$idusuario' AND MONTH(fecha)='$mes' AND YEAR(fecha)='$ano'");
     }
     
+    function liquidacion_diasTrabajados($idusuario, $mes, $ano)
+    {
+        $query = $this->db->query("SELECT * FROM asistencia WHERE idtrabajadores='$idusuario' AND MONTH(fecha)='$mes' AND YEAR(fecha)='$ano'");
+        
+        return($query->result());
+    }
+    
+    function liquidacion_usuario($idusuario)
+    {
+        $query = $this->db->query("SELECT *,(SELECT nombre FROM afps WHERE idafps=afp) AS afp_nombre FROM trabajadores WHERE idtrabajadores='$idusuario'");
+        $data = $query->result();
+        return($data[0]);
+    }
 }

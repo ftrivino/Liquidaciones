@@ -97,6 +97,7 @@ class Trabajadores extends CI_Controller {
                    'idempresas'             => $empresa,
                    'afp'                    => $afp,  
                    'salud'                  => $salud,
+                   'cargo'                  => $cargo,
                 );
 
                 if($this->dbtrabajadores->guardar($data)){
@@ -249,15 +250,25 @@ class Trabajadores extends CI_Controller {
     
     public function ajax_liquidacion()
     {
-        $fecha = $this->input->post('fecha');
-        $idusuario = $this->input->post('idusuario');
+        $fecha      = $this->input->post('fecha');
+        $idusuario  = $this->input->post('idusuario');
         
         $partes = explode("/", $fecha);
         
         $mes = $partes[0];
         $ano = $partes[1];
         
-        $string = $this->load->view('trabajadores/liquidacion_estructura', '', TRUE);
+        /* --------------------------- ADQUIRIR DATOS --------------------------- */
+        
+        $usuario            = $this->dbtrabajadores->liquidacion_usuario($idusuario);
+        $dias_trabajados    = $this->dbtrabajadores->liquidacion_diasTrabajados($idusuario, $mes, $ano);
+        
+        /* --------------------------- ADQUIRIR DATOS --------------------------- */
+        
+        $data = array("dias_trabajados" => count($dias_trabajados),
+                      "usuario"         => $usuario);
+        
+        $string = $this->load->view('trabajadores/liquidacion_estructura', $data, TRUE);
         
         echo $string;
     }

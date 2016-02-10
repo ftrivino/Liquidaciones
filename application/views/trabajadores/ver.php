@@ -9,7 +9,6 @@
                             <th>Nombre</th> 
                             <th>Rut</th> 
                             <th>Fecha de incorporación</th>
-                            <th>Sueldo bruto</th>
                             <th>Sueldo líquido</th>
                             <th>Acciones</th> 
                         </tr> 
@@ -25,7 +24,6 @@
                             echo '  <td>'.$trabajador->nombre.'</td> ';
                             echo '  <td>'.$trabajador->rut.'</td> ';
                             echo '  <td>'.date_format($date,"d/m/Y").'</td> ';
-                            echo '  <td>$'.number_format($trabajador->sueldo_bruto,0,'.','.').'</td> ';
                             echo '  <td>$'.number_format($trabajador->sueldo_liquido,0,'.','.').'</td> ';
                             echo '  <td>';
                             echo '      <a href="/trabajadores/borrar/'.$trabajador->idempresas.'" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></a>';

@@ -92,4 +92,18 @@ class Dbtrabajadores extends CI_Model {
         $data = $query->result();
         return($data[0]);
     }
+    
+    function liquidacion_afp($idafps)
+    {
+        $query = $this->db->query("SELECT * FROM afps WHERE idafps='$idafps'");
+        $data = $query->result();
+        return($data[0]);
+    }
+    
+    function liquidacion_empresa($idempresa)
+    {
+        $query = $this->db->query("SELECT * FROM empresas WHERE idempresas='$idempresa'");
+        $data = $query->result();
+        return($data[0]);
+    }
 }

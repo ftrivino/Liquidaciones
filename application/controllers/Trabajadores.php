@@ -250,6 +250,8 @@ class Trabajadores extends CI_Controller {
     
     public function ajax_liquidacion()
     {
+        $this->load->helper("nlet");
+        
         $fecha      = $this->input->post('fecha');
         $idusuario  = $this->input->post('idusuario');
         
@@ -258,15 +260,57 @@ class Trabajadores extends CI_Controller {
         $mes = $partes[0];
         $ano = $partes[1];
         
-        /* --------------------------- ADQUIRIR DATOS --------------------------- */
+        /* ------------------------------- ADQUIRIR DATOS ------------------------------- */
+        
         
         $usuario            = $this->dbtrabajadores->liquidacion_usuario($idusuario);
+        $empresa            = $this->dbtrabajadores->liquidacion_empresa($usuario->idempresas);
+        $afp_datos          = $this->dbtrabajadores->liquidacion_afp($usuario->afp);
         $dias_trabajados    = $this->dbtrabajadores->liquidacion_diasTrabajados($idusuario, $mes, $ano);
         
-        /* --------------------------- ADQUIRIR DATOS --------------------------- */
+        /* ------------------------------- ADQUIRIR DATOS ------------------------------- */
+        
+        
+        /* --------------------------- CALCULANDO LIQUIDACION --------------------------- */
+        
+        $haberes = 0;
+        
+        $sueldo_base        = $empresa->sueldo_base;
+        $gratificacion      = (($sueldo_base/100)*25);
+        $colacion           = 5000;
+        $movilizacion       = 5000;
+        
+        $haberes            = $sueldo_base+$gratificacion+$colacion+$movilizacion;
+        
+        $factor_comision    = $afp_datos->comision;
+        
+        $salud              = (($haberes/100)*7);
+        $afp                = (($haberes/100)*10);
+        $comision           = (($haberes/100)*$factor_comision);
+        
+        $descuentos         = $salud+$afp+$comision;
+        
+        $liquido            = ($haberes-$descuentos);
+        
+        $liquidacion        = array("sueldo_base"   => $sueldo_base,
+                                    "gratificacion" => $gratificacion,
+                                    "colacion"      => $colacion,
+                                    "movilizacion"  => $movilizacion,
+                                    "base_imponible"=> $haberes,
+                                    "salud"         => $salud,
+                                    "afp"           => $afp,
+                                    "comision"      => $comision,
+                                    "haberes"       => $haberes,
+                                    "descuentos"    => $descuentos,
+                                    "liquido"       => $liquido,
+                                    "esperado_liquido" => $usuario->sueldo_liquido);
+        
+        /* --------------------------- CALCULANDO LIQUIDACION --------------------------- */
         
         $data = array("dias_trabajados" => count($dias_trabajados),
-                      "usuario"         => $usuario);
+                      "usuario"         => $usuario,
+                      "empresa"         => $empresa,
+                        "liquidacion"   => $liquidacion);
         
         $string = $this->load->view('trabajadores/liquidacion_estructura', $data, TRUE);
         

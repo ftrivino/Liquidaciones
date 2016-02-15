@@ -63,7 +63,7 @@
                                     <table border="0" style="margin-top: 0px;" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
                                             <td width="70%">Sueldo base</td>
-                                            <td width="30%" align="right">$<?php echo number_format(250000,0,".","."); ?></td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['sueldo_base'],0,".","."); ?></td>
                                         </tr>
                                         <tr>
                                             <td width="70%">Bono</td>
@@ -71,7 +71,7 @@
                                         </tr>
                                         <tr>
                                             <td width="70%">Gratificación legal</td>
-                                            <td width="30%" align="right">$90.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['gratificacion'],0,".","."); ?></td>
                                         </tr>
                                         <tr>
                                             <td width="70%">Horas extra</td>
@@ -79,11 +79,11 @@
                                         </tr>
                                         <tr>
                                             <td width="70%">Colación</td>
-                                            <td width="30%" align="right">$5.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['colacion'],0,".","."); ?></td>
                                         </tr>
                                         <tr>
                                             <td width="70%">Movilización</td>
-                                            <td width="30%" align="right">$5.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['movilizacion'],0,".","."); ?></td>
                                         </tr>
                                         <tr>
                                             <td width="70%"><hr></td>
@@ -91,7 +91,7 @@
                                         </tr>
                                         <tr>
                                             <td width="70%"><strong>Total haberes</strong></td>
-                                            <td width="30%" align="right">$350.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['haberes'],0,".","."); ?></td>
                                         </tr>
                                     </table>
                                 </td>
@@ -114,15 +114,15 @@
                                     <table border="0" style="margin-top: 0px;" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
                                             <td width="70%">Cotización AFP</td>
-                                            <td width="30%" align="right">$250.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['afp'],0,".","."); ?></td>
                                         </tr>
                                         <tr>
-                                            <td width="70%">Cotización voluntaria AFP</td>
-                                            <td width="30%" align="right">$100.000</td>
+                                            <td width="70%">Comisión AFP</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['comision'],0,".","."); ?></td>
                                         </tr>
                                         <tr>
                                             <td width="70%">Cotización salud</td>
-                                            <td width="30%" align="right">$90.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['salud'],0,".","."); ?></td>
                                         </tr>
                                         <tr>
                                             <td width="70%">Seguro de cesantía</td>
@@ -142,7 +142,7 @@
                                         </tr>
                                         <tr>
                                             <td width="70%"><strong>Total descuentos</strong></td>
-                                            <td width="30%" align="right">$350.000</td>
+                                            <td width="30%" align="right">$<?php echo number_format($liquidacion['descuentos'],0,".","."); ?></td>
                                         </tr>
                                     </table>
                                     
@@ -160,12 +160,12 @@
                     </td>
                     
                     <td style="padding: 20px;" align="right" width="50%">
-                        <p style="font-family: Arial; font-weight: bold;">$400.000</p>
+                        <p style="font-family: Arial; font-weight: bold;">$<?php echo number_format($liquidacion['liquido'],0,".","."); ?> $<?php echo number_format($liquidacion['esperado_liquido'],0,".","."); ?></p>
                     </td>
                 </tr>
             </table>
             <br/>
-            <p>EN LETRAS : CUATROCIENTOS TREINTA Y DOS MIL SETECIENTOS OCHENTA Y CUATRO PESOS.</p>
+            <p>EN LETRAS : <?php $l = new NumberToLetterConverter(); echo @$l->to_word($liquidacion['liquido'],'ARS').' PESOS'; ?></p>
             <br/><br/>
         </div>
     </div> <!-- /container -->

@@ -55,6 +55,7 @@ class Empresas extends CI_Controller {
             $nombre         = $this->input->post('nombre');
             $rut            = $this->input->post('rut');
             $razonsocial    = $this->input->post('razonsocial');
+            $sueldo_base    = $this->input->post('sueldo_base');
             
             if(!empty($nombre) && !empty($rut)){
                 $data = array(
@@ -62,6 +63,7 @@ class Empresas extends CI_Controller {
                    'rut'            => $rut,
                    'razonsocial'    => $razonsocial,
                    'idusuarios'     => $this->sess_data['uid'],
+                   'sueldo_base'    => $sueldo_base,
                 );
 
                 if($this->dbempresas->guardar($data)){

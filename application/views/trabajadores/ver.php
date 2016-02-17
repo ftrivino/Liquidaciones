@@ -30,6 +30,7 @@
                             echo '      <a href="/trabajadores/editar/'.$trabajador->idempresas.'" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>';
                             echo '      <a href="/trabajadores/calendario/'.$trabajador->idtrabajadores.'" class="btn btn-default btn-xs"><i class="fa fa-calendar"></i></a>';
                             echo '      <a href="/trabajadores/liquidacion/'.$trabajador->idtrabajadores.'" class="btn btn-default btn-xs"><i class="fa fa-archive"></i></a>';
+                            echo '      <a href="/trabajadores/bonos/'.$trabajador->idtrabajadores.'" class="btn btn-default btn-xs"><i class="fa fa-money"></i></a>';
                             echo '  </td> ';
                             echo '</tr>';
                             

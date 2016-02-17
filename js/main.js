@@ -56,6 +56,21 @@ function ajax_liquidacion(){
       });
 }
 
+function ajax_guardar_bonos(){
+    
+    var bonos = $("#form_bonos").serialize();
+    $(".boton-guardar-bonos").toggleClass('active');
+    
+    $.ajax({
+      method: "POST",
+      url: "/trabajadores/ajax_guardar_bonos/",
+      data: { bonos: bonos, idusuario: idusuario }
+    })
+      .done(function( data ) {
+        $("#contenido_liquidacion_ajax").html(data);
+        $(".boton-guardar-bonos").toggleClass('active');
+      });
+}
 
 function dar_formato(num){  
     var cadena = "";
@@ -87,4 +102,20 @@ $(document).ready(function(e) {
         checkBoxes.prop("checked", !checkBoxes.prop("checked"));
     });
     
+    
+    $("#btn_agregar_bono").click(function(){
+        
+        var html = '<p><br/>&nbsp;</p><div class="col-sm-8">';
+            html += '                        <div class="form-group">';
+            html += '                            <label for="concepto">Concepto</label>';
+            html += '                            <input type="text" class="form-control" id="concepto" placeholder="Cocepto" name="concepto[]">';
+            html += '                        </div>';
+            html += '                        <div class="form-group">';
+            html += '                            <label for="monto">Monto</label>';
+            html += '                            <input type="text" class="form-control" id="monto" placeholder="Monto" name="monto">';
+            html += '                        </div>';
+            html += '                    </div>';
+        
+        $("#bonos").append(html);
+    });
 });

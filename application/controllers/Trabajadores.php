@@ -316,4 +316,37 @@ class Trabajadores extends CI_Controller {
         
         echo $string;
     }
+    
+    public function bonos($trabajador){
+                        
+            $data = array("trabajador" => $trabajador);
+            
+            $this->load->view('header');
+            $this->load->view('nav');
+            $this->load->view('trabajadores/bonos', $data);
+            $this->load->view('footer');
+    }
+    
+    public function ajax_guardar_bonos()
+    {
+        print_r($this->input->post());
+//        $idusuario  = $this->input->post('idusuario');
+//        
+//        $asistencia = $this->input->post('asistencia');
+//        $fecha_base = $this->input->post('fecha_base');
+//                
+//        $partes_fecha_base = explode("/", $fecha_base);
+//        
+//        $mes = $partes_fecha_base[0];
+//        $ano = $partes_fecha_base[1];
+//        
+//        $this->dbtrabajadores->limpiar_mes($idusuario, $mes, $ano);
+//        
+//        foreach($asistencia as $fecha){
+//            $data = array("fecha" => $fecha,
+//                          "idtrabajadores" => $idusuario);
+//            
+//            $this->dbtrabajadores->guardar_asistencia($data);
+//        }
+    }
 }
